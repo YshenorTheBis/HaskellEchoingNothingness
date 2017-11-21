@@ -3,21 +3,27 @@
 
 
 
+type Variable = String
 
-data Expression = Variable | int | Expression B_Operator Expression | U_Operator Expression
+data B_Operator = Add Expression Expression
+				| Substract Expression Expression
+				| multiply Expression Expression
+				| exponent Expression Expression
+				
+data U_Operator = minus Expression
 
-data U_Operator = substract :: Expression -> - Expression
+data Expression = Variable 
+				| Int 
+				| Expression `B_Operator` Expression 
+				| U_Operator Expression
 
-data B_Operator = somme :: Expression -> Expression
-, multiplication, et exponentiation
-
-
-Store :: (Eq k) => k -> [(k, v)] -> Maybe v
-Store key [] = Nothing
-Store key ((k,v):xs)
+data Store = [(k,v)]
+				
+store :: (Variable k) => k -> [(k, v)] -> Maybe v
+store key [] = Nothing
+store key ((k,v):xs)
 	| key == x = Just v
 	| otherwise = Store key xs
 
-data Variable
-
 eval :: Store -> Expression ->Maybe Float
+eval (Variable v)=> str v = store v str 
