@@ -25,4 +25,5 @@ store key ((k,v):xs)
     | otherwise = Store key xs
 
 eval :: Store -> Expression ->Maybe Float
+eval (Float v)=> str v = v
 eval (Variable v)=> str v = store v str 
